@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WebViewJsBridge-Android-Example</string>
+    <string name="test_button1">test1</string>
+    <string name="test_button2">test2</string>
+    <string name="test_button3">test3</string>
+    <string name="test_button4">test4</string>
+</resources>
