@@ -1,15 +1,16 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
 
 
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -27,8 +28,19 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+publish {
+    userOrg = 'liuhaichuan'
+    repoName = 'webviewjsbridge'
+    groupId = 'com.lhc'
+    artifactId = 'webviewjsbridge'
+    publishVersion = '1.0.0'
+    desc = 'WebViewJsBridge is used to implement communication between H5 and WebView.\n' +
+            'It\'s simple, easy to use, non-invasive for WebView'
+    website = 'https://github.com/al-liu/WebViewJsBridge-Android'
 }
