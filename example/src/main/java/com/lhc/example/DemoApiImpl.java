@@ -16,7 +16,7 @@ public class DemoApiImpl {
     @JavascriptInterface
     public void test1(String data, ResponseHandler<String> responseHandler){
         Log.d(TAG,  String.format("Js native api test1, data is:%s", data));
-        responseHandler.complete("native api test1'callback,");
+        responseHandler.complete("native api test1'callback,(备注：汉字测试)");
     }
 
     @JavascriptInterface
@@ -32,6 +32,6 @@ public class DemoApiImpl {
     @JavascriptInterface
     public void test4(ResponseHandler<String> responseHandler){
         Log.d(TAG,  "Js native api test4, data is null");
-        responseHandler.complete("native api test4'callback,");
+        responseHandler.complete("native api test4'callback,(备注：汉字测试)");
     }
 }
