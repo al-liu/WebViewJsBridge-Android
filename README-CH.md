@@ -1,5 +1,7 @@
 # WebViewJsBridge-Android
 
+[![](https://img.shields.io/badge/build-pass-green)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/badge/language-Java-brightgreen)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/badge/minSdkVersion-19-orange)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/github/license/al-liu/WebViewJsBridge-Android)](./LICENSE)
+
 WebViewJsBridge-Android 是 HTML5 和 WebView 之间用于通讯的工具库。
 
 WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://github.com/al-liu/WebViewJsBridge-iOS)

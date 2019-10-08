@@ -1,5 +1,7 @@
 # WebViewJsBridge-Android
 
+[![](https://img.shields.io/badge/build-pass-green)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/badge/language-Java-brightgreen)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/badge/minSdkVersion-19-orange)](https://github.com/wendux/DSBridge-Android) [![](https://img.shields.io/github/license/al-liu/WebViewJsBridge-Android)](./LICENSE)
+
 WebViewJsBridge-Android is a tool library for communication between HTML5 and UIWebView & WKWebView.
 
 WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://github.com/al-liu/WebViewJsBridge-iOS)
