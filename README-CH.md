@@ -10,7 +10,7 @@ WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://gi
 
 下面这张图帮助理解它们之间的关系：
 
-![WebViewJsBridge-namespace.png](https://i.loli.net/2019/10/08/a8hiDPQNAUOlByo.png)
+![WebViewJsBridge-namespace.png](https://i.loli.net/2019/10/08/hdjYIevufoQr7wX.png)
 
 ## 系统版本要求
 支持 API 19，Android4.4及以上的系统版本。

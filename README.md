@@ -12,7 +12,7 @@ It is cross-platform supports iOS, Android, JavaScript and easy to use. It is no
 
 Refer to the following diagram:
 
-![WebViewJsBridge-namespace.png](https://i.loli.net/2019/10/08/a8hiDPQNAUOlByo.png)
+![WebViewJsBridge-namespace.png](https://i.loli.net/2019/10/08/hdjYIevufoQr7wX.png)
 
 ## Requirements
 Support for API 19, Android 4.4 and above.
