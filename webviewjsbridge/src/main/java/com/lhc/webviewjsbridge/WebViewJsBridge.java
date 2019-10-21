@@ -190,15 +190,12 @@ public class WebViewJsBridge {
      * If hcJsBridge.js is not introduced in H5,
      * you need to call the injectWebViewJavascript method in onPageFinished.
      *
-     * <blockquote><pre>
      *     mMainWebView.setWebViewClient(new WebViewClient() {
-     *         @Override
      *         public void onPageFinished(WebView view, String url) {
      *             super.onPageFinished(view, url);
      *             mJsBridge.injectWebViewJavascript();
      *         }
      *     });
-     * </pre></blockquote>
      *
      */
     public void injectWebViewJavascript() {
