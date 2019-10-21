@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.lhc.example.utils.SelectPhotoUtils;
@@ -65,6 +66,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         mMainWebView.loadUrl("file:///android_asset/test.html");
+
+        // Test does not introduce hcJsBridge.js in H5, you need to load testWithNoJsFile.html.
+//        mMainWebView.loadUrl("file:///android_asset/testWithNoJsFile.html");
+        mMainWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                // Test does not introduce hcJsBridge.js in H5, you need to call injectWebViewJavascript in onPageFinished.
+//                mJsBridge.injectWebViewJavascript();
+            }
+        });
     }
 
     @Override

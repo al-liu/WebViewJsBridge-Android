@@ -8,6 +8,8 @@ import android.webkit.WebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -182,6 +184,48 @@ public class WebViewJsBridge {
      */
     public void callHandler(String handlerName, ResponseHandler responseHandler) {
         callHandler(handlerName, null, responseHandler);
+    }
+
+    /**
+     * If hcJsBridge.js is not introduced in H5,
+     * you need to call the injectWebViewJavascript method in onPageFinished.
+     *
+     * <blockquote><pre>
+     *     mMainWebView.setWebViewClient(new WebViewClient() {
+     *         @Override
+     *         public void onPageFinished(WebView view, String url) {
+     *             super.onPageFinished(view, url);
+     *             mJsBridge.injectWebViewJavascript();
+     *         }
+     *     });
+     * </pre></blockquote>
+     *
+     */
+    public void injectWebViewJavascript() {
+        String script = "";
+        try {
+            InputStream is = this.mWebView.getContext().getAssets()
+                    .open("WebViewJavaScriptBridge.js");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            script = new String(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!"".equals(script)) {
+            mWebView.evaluateJavascript(script, new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String s) {
+                    if (mIsDebug) {
+                        Log.d(TAG, "WebView inject js succeeded!");
+                    }
+                }
+            });
+        } else {
+            Log.e(TAG, "WebView inject js failed!");
+        }
     }
 
     private class MessageHandlerJsInterface {
