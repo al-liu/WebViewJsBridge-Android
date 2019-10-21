@@ -6,7 +6,7 @@ WebViewJsBridge-Android 是 HTML5 和 WebView 之间用于通讯的工具库。
 
 WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://github.com/al-liu/WebViewJsBridge-iOS)
 
-它的特点是跨平台，支持 iOS，Android，JavaScript，接口统一，简单易用。工具库的实现对 WebView 无侵入性。使用以类的方式来管理通信的接口，每个接口的实现类对应唯一的命名空间，如 ui.alert，ui 对应一个实现类的命名空间，alert 是该实现类的一个实现方法。
+它的特点是跨平台，支持 iOS，Android，JavaScript，接口统一，简单易用。工具库的实现对 WebView 无侵入性。使用以类的方式来管理通信的接口，每个接口的实现类对应唯一的命名空间，如 ui.alert，ui 对应一个实现类的命名空间，alert 是该实现类的一个实现方法。在 1.1.0 版本中， H5 可以不引入 hcJsBridge.js 文件。
 
 下面这张图帮助理解它们之间的关系：
 
@@ -20,11 +20,13 @@ WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://gi
 ### Gradle
 
 ```java
-compile 'com.lhc:webviewjsbridge:1.0.0'
+compile 'com.lhc:webviewjsbridge:1.1.0'
 ```
 
 ### 引入 WebViewJsBridge 的 js 文件
 在 html 中 `<script>引入 hcJsBridge.js</script>`。
+
+**注意: 1.1.0 版本 H5 可以不引入 hcJsBridge.js 文件，但使用方法有少许差异，后面有介绍。**
 
 ## Example 的说明
 example 模块中提供完整使用示例，包括基础的调用演示和进阶用法，如，调用相机拍摄一张图片，使用 `okhttp` 发起一个 GET 请求。
@@ -37,6 +39,18 @@ example 模块中提供完整使用示例，包括基础的调用演示和进阶
 // WebView 要开启 JavaScriptEnabled
 webSettings.setJavaScriptEnabled(true);
 mJsBridge = WebViewJsBridge.newInstance(mMainWebView);
+```
+
+**如果 H5 不引入 hcJsBridge.js，则还需要在 onPageFinished 中调用 injectWebViewJavascript 方法**
+
+```java
+mMainWebView.setWebViewClient(new WebViewClient() {
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        mJsBridge.injectWebViewJavascript();
+    }
+});
 ```
 
 ### 原生注册接口实现类供 HTML5 调用
@@ -93,6 +107,8 @@ mJsBridge.callHandler("test1", "test1 data", new ResponseHandler() {
 
 ### 初始化 HTML5 的 WebViewJsBridge 环境
 
+**如果 H5 引入 hcJsBridge.js，则使用下面的方式引入。**
+
 ```js
 <!DOCTYPE html>
 <html>
@@ -102,6 +118,19 @@ mJsBridge.callHandler("test1", "test1 data", new ResponseHandler() {
     </head>
     ...
 </html>
+```
+
+**如果 H5 不引入 hcJsBridge.js，则使用下面这个方法注册接口。**
+
+```js
+// 在这个 window._hcJsBridgeInitFinished 全局函数中等待 bridge 初始化完成，然后注册接口，初始调用。
+window._hcJsBridgeInitFinished = function(bridge) {
+    bridge.registerHandler("test1", function(data, callback) {
+        callback('callback native,handlename is test1');
+    })
+    
+    bridge.callHandler('ui.test3');
+}
 ```
 
 ### HTML5 注册接口供原生调用

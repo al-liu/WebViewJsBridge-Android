@@ -8,7 +8,7 @@ WebViewJsBridge-iOS：[https://github.com/al-liu/WebViewJsBridge-iOS](https://gi
 
 [Chinese-Document 中文文档](./README-CH.md)
 
-It is cross-platform supports iOS, Android, JavaScript and easy to use. It is non-intrusive to WebView. Support the use of classes to manage apis, each implementation class corresponds to a unique namespace, such as ui.alert, ui is a namespace, and alert is an implementation method.
+It is cross-platform supports iOS, Android, JavaScript and easy to use. It is non-intrusive to WebView. Support the use of classes to manage apis, each implementation class corresponds to a unique namespace, such as ui.alert, ui is a namespace, and alert is an implementation method.In version 1.1.0, H5 may not introduce the hcJsBridge.js file.
 
 Refer to the following diagram:
 
@@ -22,11 +22,13 @@ Support for API 19, Android 4.4 and above.
 ### Gradle
 
 ```java
-compile 'com.lhc:webviewjsbridge:1.0.0'
+compile 'com.lhc:webviewjsbridge:1.1.0'
 ```
 
 ### Install HCWebViewJsBridge in HTML5
 `<script>hcJsBridge.js</script>` in html.
+
+**Note: In version 1.1.0, H5 may not introduce the hcJsBridge.js file, but there are a few differences in use.**
 
 ## Example
 
@@ -40,6 +42,18 @@ The full example is provided in the example module, including basic demos and ad
 // WebView to enable JavaScript
 webSettings.setJavaScriptEnabled(true);
 mJsBridge = WebViewJsBridge.newInstance(mMainWebView);
+```
+
+**If H5 does not introduce hcJsBridge.js, you will also need to call the injectWebViewJavascript method in onPageFinished**
+
+```java
+mMainWebView.setWebViewClient(new WebViewClient() {
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        mJsBridge.injectWebViewJavascript();
+    }
+});
 ```
 
 ### Register implementation class in native
@@ -96,6 +110,8 @@ mJsBridge.callHandler("test1", "test1 data", new ResponseHandler() {
 
 ### Initialize WebViewJsBridge in HTML5
 
+**If H5 introduces hcJsBridge.js, it is introduced in the following way.**
+
 ```js
 <!DOCTYPE html>
 <html>
@@ -105,6 +121,19 @@ mJsBridge.callHandler("test1", "test1 data", new ResponseHandler() {
     </head>
     ...
 </html>
+```
+
+**If H5 does not introduce hcJsBridge.js, use the following method to register the apis.**
+
+```js
+// Wait for the bridge initialization to complete in this window._hcJsBridgeInitFinished global function, then register the api, initial call.
+window._hcJsBridgeInitFinished = function(bridge) {
+    bridge.registerHandler("test1", function(data, callback) {
+        callback('callback native,handlename is test1');
+    })
+    
+    bridge.callHandler('ui.test3');
+}
 ```
 
 ### Register apis for native call in HTML5
