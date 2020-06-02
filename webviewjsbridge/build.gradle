@@ -9,9 +9,6 @@ android {
         targetSdkVersion 28
         versionCode 3
         versionName "1.1.1"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -20,11 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
 }
 
 publish {
