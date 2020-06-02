@@ -16,7 +16,7 @@ WebViewJsBridge-Android 是 HTML5 和 WebView 之间用于通讯的工具库。
 ### Gradle
 
 ```java
-compile 'com.lhc:webviewjsbridge:1.1.0'
+compile 'com.lhc:webviewjsbridge:1.1.1'
 ```
 
 ### 手动安装
